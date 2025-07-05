@@ -8,9 +8,9 @@
 const int greenLedPin = 11;
 const int orangeLedPin = 10;
 const int redLedPin = 9; 
-const int greenPotPin = A0;
+const int greenPotPin = A2;
 const int orangePotPin = A1;
-const int redPotPin = A2;
+const int redPotPin = A0;
 
 const int downPin = 2;
 const int upPin = 3;
@@ -59,11 +59,12 @@ void setup() {
   pinMode(upPin, INPUT_PULLUP);
   pinMode(okPin, INPUT_PULLUP);
 
-  TCCR1A = _BV(WGM10) | _BV(COM1A1) | _BV(COM1B1);  // Fast PWM 10-bit, non-inverting
-  TCCR1B = _BV(WGM12) | _BV(CS10);                 // No prescaling
-
-  TCCR2A = _BV(WGM20) | _BV(WGM21) | _BV(COM2A1);  // Fast PWM, non-inverting
+  TCCR2A = _BV(WGM20) | _BV(WGM21) | _BV(COM2A1) | _BV(COM1B1);  // Fast PWM, non-inverting
   TCCR2B = _BV(CS20);  // Prescaler = 1 (fastest frequency)
+
+  // Set 10-bit Fast PWM mode (WGM13:0 = 0111)
+  TCCR1A = _BV(WGM11) | _BV(WGM10) | _BV(COM1A1);  // WGM11=1, WGM10=1, COM1A1=1 (non-inverting)
+  TCCR1B = _BV(WGM12) | _BV(CS10);                  // WGM12=1, CS10=1 (no prescaling)
 
   // Set initial duty cycle (10-bit range: 0–1023)
   OCR1A = 0;  // 0% on pin 9, red - 10-bit range: 0-1023
@@ -153,7 +154,7 @@ void loop() {
   delay(halfPeriod);
 
   //analogWrite(greenLedPin, 0);
-  OCR2A = greenIntensity;
+  OCR2A = 0;
   //analogWrite(orangeLedPin, orangeIntensity);
   OCR1B = orangeIntensity;
   //analogWrite(redLedPin, 0);
