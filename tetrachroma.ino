@@ -59,11 +59,11 @@ void setup() {
   pinMode(upPin, INPUT_PULLUP);
   pinMode(okPin, INPUT_PULLUP);
 
-  TCCR2A = _BV(WGM20) | _BV(WGM21) | _BV(COM2A1) | _BV(COM1B1);  // Fast PWM, non-inverting
+  TCCR2A = _BV(WGM20) | _BV(WGM21) | _BV(COM2A1);  // Fast PWM, non-inverting
   TCCR2B = _BV(CS20);  // Prescaler = 1 (fastest frequency)
 
   // Set 10-bit Fast PWM mode (WGM13:0 = 0111)
-  TCCR1A = _BV(WGM11) | _BV(WGM10) | _BV(COM1A1);  // WGM11=1, WGM10=1, COM1A1=1 (non-inverting)
+  TCCR1A = _BV(WGM11) | _BV(WGM10) | _BV(COM1A1) | _BV(COM1B1);  // WGM11=1, WGM10=1, COM1A1=1, COM1B1=1 (non-inverting)
   TCCR1B = _BV(WGM12) | _BV(CS10);                  // WGM12=1, CS10=1 (no prescaling)
 
   // Set initial duty cycle (10-bit range: 0–1023)
@@ -175,14 +175,14 @@ void loop() {
 
       if (menu[1].value) {
         lcd.setCursor(0,1);      
-        lcd.print("G");
-        lcd.print(greenIntensity);
-        lcd.setCursor(4,1);
+        lcd.print("R");
+        lcd.print(redIntensity);
+        lcd.setCursor(5,1);
         lcd.print(" O");
         lcd.print(orangeIntensity);
-        lcd.setCursor(9,1);
-        lcd.print(" R");
-        lcd.print(redIntensity);
+        lcd.setCursor(11,1);
+        lcd.print(" G");
+        lcd.print(greenIntensity);
       }
 
       lcdLastRefresh = millis();
