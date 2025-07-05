@@ -5,9 +5,9 @@
 #include <LCD-I2C.h>
 #include <Wire.h>
 
-const int greenLedPin = 9;
+const int greenLedPin = 11;
 const int orangeLedPin = 10;
-const int redLedPin = 11; 
+const int redLedPin = 9; 
 const int greenPotPin = A0;
 const int orangePotPin = A1;
 const int redPotPin = A2;
@@ -59,11 +59,16 @@ void setup() {
   pinMode(upPin, INPUT_PULLUP);
   pinMode(okPin, INPUT_PULLUP);
 
-  // Raise frequency on Timer1: pins 9 and 10 → ~31.25 kHz
-  TCCR1B = TCCR1B & 0b11111000 | 0x01;
+  TCCR1A = _BV(WGM10) | _BV(COM1A1) | _BV(COM1B1);  // Fast PWM 10-bit, non-inverting
+  TCCR1B = _BV(WGM12) | _BV(CS10);                 // No prescaling
 
-  // Raise frequency on Timer2: pin 11 → ~31.25 kHz
-  TCCR2B = TCCR2B & 0b11111000 | 0x01;
+  TCCR2A = _BV(WGM20) | _BV(WGM21) | _BV(COM2A1);  // Fast PWM, non-inverting
+  TCCR2B = _BV(CS20);  // Prescaler = 1 (fastest frequency)
+
+  // Set initial duty cycle (10-bit range: 0–1023)
+  OCR1A = 0;  // 0% on pin 9, red - 10-bit range: 0-1023
+  OCR1B = 0;  // 0% on pin 10, orange - 10-bit range: 0-1023
+  OCR2A = 0;  // 0% on pin 11, green - 8-bit range: 0-255
 
   Serial.begin(9600);
   Serial.println("Tetrachromacy Test Device Initialized");
@@ -135,18 +140,24 @@ void loop() {
   }   
 
   greenIntensity = map(analogRead(greenPotPin), 0, 1023, 0, 255);
-  orangeIntensity = map(analogRead(orangePotPin), 0, 1023, 0, 255);
-  redIntensity = map(analogRead(redPotPin), 0, 1023, 0, 255);
+  orangeIntensity = map(analogRead(orangePotPin), 0, 1023, 0, 1023);
+  redIntensity = map(analogRead(redPotPin), 0, 1023, 0, 1023);
   halfPeriod = 1000UL / menu[0].value / 2;
 
-  analogWrite(greenLedPin, greenIntensity);
-  analogWrite(orangeLedPin, 0);
-  analogWrite(redLedPin, redIntensity);
+  //analogWrite(greenLedPin, greenIntensity);
+  OCR2A = greenIntensity;
+  //analogWrite(orangeLedPin, 0);
+  OCR1B = 0;
+  //analogWrite(redLedPin, redIntensity);
+  OCR1A = redIntensity;
   delay(halfPeriod);
 
-  analogWrite(greenLedPin, 0);
-  analogWrite(orangeLedPin, orangeIntensity);
-  analogWrite(redLedPin, 0);
+  //analogWrite(greenLedPin, 0);
+  OCR2A = greenIntensity;
+  //analogWrite(orangeLedPin, orangeIntensity);
+  OCR1B = orangeIntensity;
+  //analogWrite(redLedPin, 0);
+  OCR1A = 0;
 
   if (!menu[2].value || displayDataOnce) {
     if (millis()-lcdLastRefresh>1000 || displayDataOnce) {
