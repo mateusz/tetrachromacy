@@ -229,7 +229,8 @@ void loop() {
   // ---------- Main dithering loop ----------
 
   // Read potentiometer values
-  greenIntensity = map(analogRead(greenPotPin), 0, 1023, 0, 1023);
+  //greenIntensity = map(analogRead(greenPotPin), 0, 1023, 0, 1023);
+  greenIntensity = map(analogRead(greenPotPin), 0, 1023, 0, 255);
   orangeIntensity = map(analogRead(orangePotPin), 0, 1023, 0, 1023);
   redIntensity = map(analogRead(redPotPin), 0, 1023, 0, 1023);
   halfPeriod = 1000UL / menu[0].value / 2;
@@ -237,12 +238,14 @@ void loop() {
   // Set LED states based on flicker state
   if (!hfpState) {
     // First half period - Green LED with 10-bit software PWM
-    setSoftwarePWM10bit(greenIntensity);
+    //setSoftwarePWM10bit(greenIntensity);
+    OCR2A = greenIntensity;
     OCR1B = 0;  // Orange off
     OCR1A = redIntensity;  // Red on
   } else {
     // Second half period - Orange LED
-    setSoftwarePWM10bit(0);  // Green off
+    //setSoftwarePWM10bit(0);  // Green off
+    OCR2A = 0;
     OCR1B = orangeIntensity;  // Orange on
     OCR1A = 0;  // Red off
   }
@@ -251,5 +254,6 @@ void loop() {
   pwmCounter++;
 
   // Small delay to prevent overwhelming the system while allowing fast PWM updates
-  delayMicroseconds(DITHER_PERIOD_MICROS);
+  //delayMicroseconds(DITHER_PERIOD_MICROS);
+  delay(halfPeriod/10);
 }
