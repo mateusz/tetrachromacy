@@ -36,6 +36,10 @@ Three buttons are also used for control of the software functions, such as HFP f
 
 ![Schematics](schematics.jpg)
 
+Diffusion box dimensions:
+
+![Diff box dimensions](diffusion_box_diag.png)
+
 Here is the finished project:
 
 ![Electronics box](entire_setup.jpeg)
