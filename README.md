@@ -14,14 +14,13 @@ Three buttons are also used for control of the software functions, such as HFP f
 
 ![Schematics](schematics.jpg)
 
-A lunch box is used for containing all the electronics:
+Here is the finished project:
 
 ![Electronics box](entire_setup.jpeg)
 
-Cardboard diffusion box makes sure lights are thoroughly mixed by facing the LEDs away from the viewer and three layers of tracing paper.
+Cardboard diffusion box makes sure lights are thoroughly mixed by facing the LEDs away from the viewer and by using three layers of tracing paper.
 
 ![Diffusion box](diffusion_box.jpeg)
-
 
 ## Test run
 
@@ -29,7 +28,7 @@ This has been captured in low-res mode, but suitably demonstrates the general id
 
 Importantly, you can't use a video of this device for tetrachromacy testing. This is because neither the camera nor the file format is able carry orange light information. The screen can't produce pure orange either because it only has RGB LEDs - and pure orange is critical for this.
 
-![test](test.mp4)
+[Youtube video](https://www.youtube.com/watch?v=cta9pufByBE)
 
 ## Shopping list
 
@@ -56,5 +55,3 @@ Importantly, you can't use a video of this device for tetrachromacy testing. Thi
 |          |                |                          | Cardboard, tracing paper, hot glue, paper glue            |                                 |
 |          |                |                          | A lunchbox                                                |                                 |
 |          |                |                          | Leftover 3A USB power supply 5V                           |                                 |
-|          |                |                          |                                                           |                                 |
-
