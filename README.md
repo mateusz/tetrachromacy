@@ -2,15 +2,37 @@
 
 This project implements a DIY device for screening orange-cone tetrachromacy using Heterochromatic Flicker Photometry (HFP).
 
+Tetrachromacy is a hypothesised ability of some women to be able to discern the 4th dimension of color via additional mutated visual receptors. Most humans have just three types of color receptors: red, green and blue. Tetrachromats would possess four.
+
+I've built this device to test my young daughter for tetrachromatic perception.
+
+![Video shot](video_shot.png)
+
 ## Theory
 
 The test rapidly alternates two light sources — one pure orange LED and one mixed red+green source — at ~20 Hz. The subject adjusts the red and green intensities using potentiometers to try and eliminate visible flicker. A successful flicker cancellation suggests typical trichromatic vision, while persistent flicker may indicate tetrachromatic perception.
+
+## Example test
+
+The following video captures how a test might be conducted. First, each bank of LEDs is controlled separately. Then green bank of LEDs is set to maximum (as it's the weakest and has least resolution, so it's best left fixed), and then red and orange is tweaked to attempt to remove the flicker completely. This cannot be shown on video due to the interplay with camera and recording framerate.
+
+[Click here to go to the YouTube video](https://www.youtube.com/watch?v=fo7DTIZ4m54)
+
+Unfortunately the test cannot be replicated on screen, as pure orange light is needed. Neither the camera, the recording, nor a typical computer screen is able to reproduce pure orange, because these systems are inherently trichromatic - they create an illusion of orange by mixing red and green.
+
+It's extremely rare for men to be tetrachromats, so unsurprisingly I am able to eliminate the flicker almost completely by using my eyes. I can't tell apart orange from a mix of green and red. I said "almost" because the flicker effect varies depending on the viewing conditions and position of the eyes. For example peripheral vision has a lower [critical flicker frequency](https://en.wikipedia.org/wiki/Flicker_fusion_threshold]) so at 20Hz I'm still able to see the flicker if I look away from the viewport.
+
+Theoretically, if I was a tetrachromat I wouldn't be able to prevent the flicker because in my brain red and green would not mix to create orange, as it does in regular humans.
+
+Even if I possessed the fourth receptor, for a fully functional tetrachromacy neural pathways must exist in the brain to process the extra dimension of signal. These pathways may be missing due to genetics, or perhaps these pathways might have atrophied due to societal conditioning during childhood (e.g. dad insisting that orange is the same as hyper-orange). 
+
+Ability to eliminate flicker in this test does not definitely disprove tetrachromacy. I've used commercially available LEDs, and while I tried to get the best frequencies for this setup (e.g. with relatively narrow FWHM of 20nm), the LEDs are probably still bleeding colors into each other's spectrum. This could be creating a metameric match even for a tetrachromat (metameric match is where two colors appear the same under certain viewing conditions).
 
 ## Build
 
 The device is built using an Arduino Uno, three LEDs, three potentiometers, and simple materials like cardboard. Red and orange PWM channels are configured for high-resolution brightness control, while green PWM channel in low-res mode due to Arduino Uno limitations.
 
-Three buttons are also used for control of the software functions, such as HFP frequency. A "run test" mode is used for the actual test, which just disables the screen refresh (which interferes with the test by introducing a blink every second or so).
+Three buttons are also used for control of the software functions, such as HFP frequency. A "run test" mode is used for the actual test, which just disables the LCD screen redraw (which interferes with the test by introducing an annoying blink every second or so).
 
 ![Schematics](schematics.jpg)
 
@@ -22,17 +44,9 @@ Cardboard diffusion box makes sure lights are thoroughly mixed by facing the LED
 
 ![Diffusion box](diffusion_box.jpeg)
 
-## Test run
-
-This has been captured in low-res, low-frequency mode, but suitably demonstrates the general idea - it's hard to show the exact operation due to limitations of the camera and the video format.
-
-Importantly, you can't use a video of this device for tetrachromacy testing. This is because neither the camera nor the file format is able carry orange light information. The screen can't produce pure orange either because it only has RGB LEDs - and pure orange is critical for this.
-
-[Youtube video](https://www.youtube.com/watch?v=cta9pufByBE)
-
 ## Shopping list
 
-Just a note to my future self, really.
+Apologies, this list is a bit messy.
 
 | Quantity | Part Number    | Manufacturer Part Number | Description                                               | Customer Reference              |
 | -------- | -------------- | ------------------------ | --------------------------------------------------------- | ------------------------------- |
