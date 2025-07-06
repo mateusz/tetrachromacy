@@ -12,7 +12,7 @@ I've built this device to test my young daughter for tetrachromatic perception.
 
 The test rapidly alternates two light sources — one pure orange LED and one mixed red+green source — at ~20 Hz. The subject adjusts the red and green intensities using potentiometers to try and eliminate visible flicker. A successful flicker cancellation suggests typical trichromatic vision, while persistent flicker may indicate tetrachromatic perception.
 
-## Example test
+## Administering the test
 
 The following video captures how a test might be conducted. First, each bank of LEDs is controlled separately. Then green bank of LEDs is set to maximum (as it's the weakest and has least resolution, so it's best left fixed), and then red and orange is tweaked to attempt to remove the flicker completely. This cannot be shown on video due to the interplay with camera and recording framerate.
 
