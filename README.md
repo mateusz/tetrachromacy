@@ -24,13 +24,15 @@ Cardboard diffusion box makes sure lights are thoroughly mixed by facing the LED
 
 ## Test run
 
-This has been captured in low-res mode, but suitably demonstrates the general idea - it's hard to show the exact operation anyway due to limitations of the camera and the video format.
+This has been captured in low-res, low-frequency mode, but suitably demonstrates the general idea - it's hard to show the exact operation due to limitations of the camera and the video format.
 
 Importantly, you can't use a video of this device for tetrachromacy testing. This is because neither the camera nor the file format is able carry orange light information. The screen can't produce pure orange either because it only has RGB LEDs - and pure orange is critical for this.
 
 [Youtube video](https://www.youtube.com/watch?v=cta9pufByBE)
 
 ## Shopping list
+
+Just a note to my future self, really.
 
 | Quantity | Part Number    | Manufacturer Part Number | Description                                               | Customer Reference              |
 | -------- | -------------- | ------------------------ | --------------------------------------------------------- | ------------------------------- |
